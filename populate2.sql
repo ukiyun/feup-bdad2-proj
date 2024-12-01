@@ -70,7 +70,13 @@ INSERT INTO PublishingCompany (name, country, website, foundedDate) VALUES
     ('Scholastic', 'US', 'https://www.scholastic.com', '1920-01-01'),
     ('Harvill Secker', 'UK', 'https://www.harvillsecker.co.uk', '1942-01-01'),
     ('Anchor Books', 'US', 'https://www.penguinrandomhouse.com', '1953-01-01'),
-    ('Chilton Books', 'US', 'https://www.chilton.com', '1919-01-01');
+    ('Chilton Books', 'US', 'https://www.chilton.com', '1919-01-01'),
+    ('Delacorte Press', 'US', 'www.randomhouse.com', '1928-01-01'),
+    ('Archibald Constable & Company', 'UK', 'www.archibaldconstable.co.uk', '1795-01-01'),
+    ('Doubleday', 'US', 'www.doubleday.com', '1897-01-01'),
+    ('Ballantine Books', 'US', 'www.ballantinebooks.com', '1952-01-01'),
+    ('George Allen & Unwin', 'UK', 'www.georgeallenandunwin.com', '1914-01-01'),
+    ('Harper & Brothers', 'United States', 'www.harpercollins.com', '1817-01-01');
 
 -- Populate Book Table
 INSERT INTO Book (isbn, title, ageRating, edition, totalCopies, inStockCopies, lentCopies, idPublishingCompany, idBookshelf) VALUES
@@ -78,6 +84,8 @@ INSERT INTO Book (isbn, title, ageRating, edition, totalCopies, inStockCopies, l
     ('978-0-06-284783-3', 'The Girl with the Dragon Tattoo', 'Adult', '1st Edition', 12, 6, 6, 1, '1L'),
     ('978-0-525-54414-0', 'Gone Girl', 'Adult', '1st Edition', 10, 5, 5, 2, '1F'),
     ('978-0-451-48979-6', 'The Silent Patient', 'Adult', '1st Edition', 8, 4, 4, 3, '1M'),
+    ('978-0-307-38789-9', 'The Road', 'Adult', '1st Edition', 10, 7, 3, 1, '1M'),
+    ('978-0-385-12167-5', 'The Shining', 'Adult', '2nd Edition', 18, 9, 9, 20, '1K'),
 
     -- Crime Section (idSection = 2)
     ('978-0-14-303884-5', 'The Godfather', 'Adult', '1st Edition', 15, 7, 8, 4, '2P'),
@@ -98,11 +106,14 @@ INSERT INTO Book (isbn, title, ageRating, edition, totalCopies, inStockCopies, l
     ('978-0-618-12902-2', 'The Hobbit', 'Young Adult', '1st Edition', 12, 6, 6, 10, '5T'),
     ('978-0-618-12911-4', 'Harry Potter and the Sorcerers Stone', 'Young Adult', '1st Edition', 20, 10, 10, 14, '5R'),
     ('978-0-345-46452-5', 'The Name of the Wind', 'Young Adult', '1st Edition', 8, 4, 4, 12, '5R'),
+    ('978-0-618-00222-8', 'The Lord of the Rings', 'Teens', '50th Anniversary Edition', 25, 20, 5, 21, '5T'),
 
     -- Science Fiction Section (idSection = 6)
     ('978-0-345-38918-2', 'Dune', 'Adult', '1st Edition', 10, 5, 5, 17, '6H'),
     ('978-0-451-16934-5', 'Neuromancer', 'Adult', '1st Edition', 12, 6, 6, 13, '6G'),
     ('978-1-984-83801-0', 'The Martian', 'Adult', '1st Edition', 15, 7, 8, 2, '6W'),
+    ('978-0-385-31208-3', 'Slaughterhouse-Five', 'Adult', '1st Edition', 15, 10, 5, 18, '6V'),
+    ('978-0-345-34296-0', 'Fahrenheit 451', 'Teens', '1st Edition', 20, 12, 8, 21, '6B'),
 
     -- Non-Fiction Section (idSection = 7)
     ('978-0-14-311159-7', 'Sapiens: A Brief History of Humankind', 'Adult', '1st Edition', 10, 5, 5, 15, '7H'),
@@ -112,8 +123,9 @@ INSERT INTO Book (isbn, title, ageRating, edition, totalCopies, inStockCopies, l
     -- Historical Section (idSection = 8)
     ('978-0-7432-7355-3', 'The Diary of a Young Girl', 'Teens', '1st Edition', 10, 5, 5, 16, '8F'),
     ('978-0-7432-7355-4', 'Unbroken', 'Adult', '1st Edition', 15, 7, 8, 5, '8H'),
-    ('978-1-4000-3236-1', 'The Wright Brothers', 'Adult', '1st Edition', 12, 6, 6, 1, '8M');
-
+    ('978-1-4000-3236-1', 'The Wright Brothers', 'Adult', '1st Edition', 12, 6, 6, 1, '8M'),
+    ('978-0-141-43970-9', 'Drácula', 'Teens', '3rd Edition', 12, 8, 4, 19, '8S'),
+    ('978-0-393-97283-2', 'Moby Dick', 'Adult', '2nd Edition', 14, 6, 8, 24, '8M');
 
 -- Populate Person Table
 INSERT INTO Person (firstName, lastName, birthdate, gender, idNumber, nationality) VALUES
@@ -155,7 +167,20 @@ INSERT INTO Person (firstName, lastName, birthdate, gender, idNumber, nationalit
     ('Jessica', 'Anderson', '1982-10-23', 'Female', '9876543221', 'GB'),  -- Employee 2
     ('Daniel', 'Thomas', '1988-03-04', 'Male', '9876543222', 'US'),  -- Employee 3
     ('Rachel', 'Jackson', '1990-06-10', 'Female', '9876543223', 'US'),  -- Employee 4
-    ('Benjamin', 'White', '1975-07-22', 'Male', '9876543224', 'US');  -- Employee 5
+    ('Benjamin', 'White', '1975-07-22', 'Male', '9876543224', 'US'),  -- Employee 5
+
+    -- Extra Autors
+    ('Kurt', 'Vonnegut', '1922-11-11', 'Male', '9876543225', 'US'),
+    ('Cormac', 'McCarthy', '1933-07-20', 'Male', '9876543226', 'US'),
+    ('Bram', 'Stoker', '1847-11-08', 'Male', '9876543227', 'IRL'),
+    ('Stephen', 'King', '1947-09-21', 'Male', '9876543229', 'US'),
+    ('Ray', 'Bradbury', '1920-08-22', 'Male', '9876543230', 'US'),
+    ('Herman', 'Melville', '1819-08-01', 'Male', '9876543231', 'US'),
+    ('Michelle', 'Obama', '1964-01-17', 'Female', '9876543232', 'US'),
+    ('Anne', 'Frank', '1929-06-12', 'Female', '9876543233', 'DE'),
+    ('Laura', 'Hilldebrand', '1967-05-15', 'Female', '9876543234', 'US'),
+    ('David', 'McCullough', '1933-07-07', 'Male', '9876543235', 'US');
+
 
 
     -- Populate Author Table
@@ -179,9 +204,19 @@ INSERT INTO Author (idPerson, biography, pseudonym) VALUES
     (17, 'William Gibson is an American-Canadian author best known for pioneering cyberpunk with his novel Neuromancer.', NULL),  -- Author 17
     (18, 'Andy Weir is an American author best known for writing The Martian.', NULL),  -- Author 18
     (19, 'Yuval Noah Harari is an Israeli historian and author, best known for Sapiens: A Brief History of Humankind.', NULL),  -- Author 19
-    (20, 'Tara Westover is an American memoirist, best known for Educated.', NULL);  -- Author 20
+    (20, 'Tara Westover is an American memoirist, best known for Educated.', NULL),  -- Author 20
 
-    -- Populate Patron Table (Patrons are persons who are not authors or employees)
+    -- Extra Authors
+    (36, 'Kurt Vonnegut was an American author, best known for his satirical novels such as Slaughterhouse-Five.', NULL),  -- Author 36
+    (37, 'Cormac McCarthy was an American author, best known for novels like The Road and No Country for Old Men.', NULL),  -- Author 37
+    (38, 'Bram Stoker was an Irish author, best known for writing the Gothic horror novel Dracula.', NULL),  -- Author 38
+    (39, 'Stephen King is an American author, widely regarded as the "King of Horror" for works like The Shining and It.', NULL),  -- Author 39
+    (40, 'Ray Bradbury was an American author, best known for his dystopian novel Fahrenheit 451.', NULL),  -- Author 40
+    (41, 'Herman Melville was an American author, most famous for his novel Moby-Dick.', NULL);  -- Author 41
+
+
+
+-- Populate Patron Table (Patrons are persons who are not authors or employees)
 INSERT INTO Patron (idPerson, libraryCardNumber, registrationDate) VALUES
     (21, 'PATRON001', '2023-01-10'),  -- Patron 1
     (22, 'PATRON002', '2023-02-05'),  -- Patron 2
@@ -205,53 +240,56 @@ INSERT INTO Employee (idPerson, employeeNumber, salary, hiredDate) VALUES
 
 
 -- Populate BookAuthor Table
--- Thriller Section (idSection = 1)
 INSERT INTO BookAuthor (idBook, idPerson) VALUES
-    (1, 1), (2, 1),  -- Stieg Larsson
-    (3, 2), (4, 2),  -- Gillian Flynn
-    (5, 3), (6, 3);  -- Alex Michaelides
+    -- Thriller Section
+    (1, 1),  -- The Girl with the Dragon Tattoo by Stieg Larsson
+    (2, 2),  -- Gone Girl by Gillian Flynn
+    (3, 3),  -- The Silent Patient by Alex Michaelides
+    (4, 37), -- The Road by Cormac McCarthy
+    (5, 39), -- The Shining by Stephen King
 
-    -- Crime Section (idSection = 2)
-INSERT INTO BookAuthor (idBook, idPerson) VALUES
-    (7, 4), (8, 4),  -- Mario Puzo
-    (9, 5), (10, 5),  -- Truman Capote
-    (11, 6), (12, 6);  -- Paula Hawkins
+    -- Crime Section
+    (6, 4),  -- The Godfather by Mario Puzo
+    (7, 5),  -- In Cold Blood by Truman Capote
+    (8, 6),  -- The Girl on the Train by Paula Hawkins
 
-    -- Romance Section (idSection = 3)
-INSERT INTO BookAuthor (idBook, idPerson) VALUES
-    (13, 7), (14, 7),  -- Jane Austen
-    (15, 8), (16, 8),  -- Charlotte Brontë
-    (17, 9), (18, 9);  -- Nicholas Sparks
+    -- Romance Section
+    (9, 7),  -- Pride and Prejudice by Jane Austen
+    (10, 8), -- Jane Eyre by Charlotte Brontë
+    (11, 9), -- The Notebook by Nicholas Sparks
 
-    -- Manga Section (idSection = 4)
-INSERT INTO BookAuthor (idBook, idPerson) VALUES
-    (19, 10), (20, 10),  -- Masashi Kishimoto
-    (21, 11), (22, 11),  -- Eiichiro Oda
-    (23, 12), (24, 12);  -- Hajime Isayama
+    -- Manga Section
+    (12, 10), -- Naruto by Masashi Kishimoto
+    (13, 11), -- One Piece by Eiichiro Oda
+    (14, 12), -- Attack on Titan by Hajime Isayama
 
-    -- Fantasy Section (idSection = 5)
-INSERT INTO BookAuthor (idBook, idPerson) VALUES
-    (25, 13), (26, 13),  -- J.R.R. Tolkien
-    (27, 14), (28, 14),  -- J.K. Rowling
-    (29, 15), (30, 15);  -- Patrick Rothfuss
+    -- Fantasy Section
+    (15, 13), -- The Hobbit by J.R.R. Tolkien
+    (16, 14), -- Harry Potter and the Sorcerer's Stone by J.K. Rowling
+    (17, 15), -- The Name of the Wind by Patrick Rothfuss
+    (18, 13), -- The Lord of the Rings by J.R.R. Tolkien
 
-    -- Science Fiction Section (idSection = 6)
-INSERT INTO BookAuthor (idBook, idPerson) VALUES
-    (31, 16), (32, 16),  -- Frank Herbert
-    (33, 17), (34, 17),  -- William Gibson
-    (35, 18), (36, 18);  -- Andy Weir
+    -- Science Fiction Section
+    (19, 16), -- Dune by Frank Herbert
+    (20, 17), -- Neuromancer by William Gibson
+    (21, 18), -- The Martian by Andy Weir
+    (22, 36), -- Slaughterhouse-Five by Kurt Vonnegut
+    (23, 40), -- Fahrenheit 451 by Ray Bradbury
 
-    -- Non-Fiction Section (idSection = 7)
-INSERT INTO BookAuthor (idBook, idPerson) VALUES
-    (37, 19), (38, 19),  -- Yuval Noah Harari
-    (39, 20), (40, 20),  -- Tara Westover
-    (41, 21), (42, 21);  -- Michelle Obama
+    -- Non-Fiction Section
+    (24, 19), -- Sapiens: A Brief History of Humankind by Yuval Noah Harari
+    (25, 20), -- Educated by Tara Westover
+    (26, 42), -- Becoming (no author specified)
 
-    -- Historical Section (idSection = 8)
-INSERT INTO BookAuthor (idBook, idPerson) VALUES
-    (43, 22), (44, 22),  -- Anne Frank
-    (45, 23), (46, 23),  -- Laura Hillenbrand
-    (47, 24), (48, 24);  -- David McCullough
+    -- Historical Section
+    (27, 43), -- The Diary of a Young Girl (no author specified)
+    (28, 44), -- Unbroken (no author specified)
+    (29, 45), -- The Wright Brothers (no author specified)
+    (30, 38),   -- Drácula by Bram Stoker
+    (31, 41);   -- Moby Dick by Herman Melville
+
+
+
 
 
 -- Populate the Requisition table with 2 requisitions per book for 24 books
