@@ -7,7 +7,6 @@ PRAGMA foreign_keys = ON;
 -- Drop Existing Tables/Relations
 
 DROP TABLE IF EXISTS Person;
-DROP TABLE IF EXISTS Library;
 DROP TABLE IF EXISTS Section;
 DROP TABLE IF EXISTS Bookshelf;
 DROP TABLE IF EXISTS Book;
@@ -33,46 +32,31 @@ CREATE TABLE Person (
     nationality VARCHAR(50)
 );
 
-CREATE TABLE Library (
-    idLibrary INTEGER PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    country VARCHAR(3) NOT NULL, -- ISO country code format
-    address VARCHAR(100) NOT NULL,
-    phoneNumber VARCHAR(15),
-    website VARCHAR(100),
-    openTime TIME NOT NULL,
-    closeTime TIME NOT NULL,
-    CHECK ( closeTime > openTime )
-);
-
 CREATE TABLE Section (
     idSection INTEGER PRIMARY KEY,
-    theme VARCHAR(50) NOT NULL,
-    idLibrary INTEGER,
-    FOREIGN KEY (idLibrary) REFERENCES Library(idLibrary)
+    theme VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Bookshelf (
     idBookshelf INTEGER PRIMARY KEY AUTOINCREMENT,
-    identifier VARCHAR(3) NOT NULL,
-    idSection INTEGER,
+    identifier VARCHAR(3) NOT NULL UNIQUE,
+    idSection INTEGER NOT NULL,
     FOREIGN KEY (idSection) REFERENCES Section(idSection)
 );
 
 CREATE TABLE Book (
-    isbn VARCHAR(17) PRIMARY KEY,
+    idBook INTEGER PRIMARY KEY AUTOINCREMENT,
+    isbn VARCHAR(17) NOT NULL UNIQUE,
     title VARCHAR(100) NOT NULL,
     ageRating TEXT CHECK ( ageRating IN ('Children', 'Teens', 'Young Adult', 'Adult', 'Mature')) NOT NULL,
     edition VARCHAR(10) NOT NULL,
     totalCopies NUMERIC(3) NOT NULL,
     inStockCopies NUMERIC(3) NOT NULL,
     lentCopies NUMERIC(3) NOT NULL,
-    idPublishingCompany INTEGER,
-    idBookshelf INTEGER,
-    idAuthor INTEGER,
+    idPublishingCompany INTEGER NOT NULL,
+    idBookshelf INTEGER NOT NULL,
     FOREIGN KEY (idPublishingCompany) REFERENCES PublishingCompany(idPublishingCompany),
     FOREIGN KEY (idBookshelf) REFERENCES Bookshelf(idBookshelf),
-    FOREIGN KEY (idAuthor) REFERENCES Author(idPerson),
     CHECK ( inStockCopies + lentCopies = totalCopies )
 );
 
@@ -80,10 +64,10 @@ CREATE TABLE Requisition (
     idRequisition INTEGER PRIMARY KEY,
     requisitionDate DATE NOT NULL,
     returnDate DATE NOT NULL,
-    idLibrary INTEGER,
-    idPatron INTEGER,
-    FOREIGN KEY (idLibrary) REFERENCES Library(idLibrary),
+    idPatron INTEGER NOT NULL,
+    idEmployee INTEGER NOT NULL,
     FOREIGN KEY (idPatron) REFERENCES Patron(idPerson),
+    FOREIGN KEY (idEmployee) REFERENCES Employee(idPerson),
     CHECK ( returnDate > requisitionDate )
 );
 
@@ -101,9 +85,7 @@ CREATE TABLE Patron (
     idPerson INTEGER PRIMARY KEY,
     libraryCardNumber VARCHAR(10) NOT NULL UNIQUE,
     registrationDate DATE,
-    idLibrary INTEGER,
-    FOREIGN KEY (idPerson) REFERENCES Person(idPerson),
-    FOREIGN KEY (idLibrary) REFERENCES Library(idLibrary)
+    FOREIGN KEY (idPerson) REFERENCES Person(idPerson)
 );
 
 CREATE TABLE Employee (
@@ -111,14 +93,12 @@ CREATE TABLE Employee (
     employeeNumber NUMERIC(10) NOT NULL UNIQUE,
     salary DECIMAL(8,2) NOT NULL,
     hiredDate DATE,
-    idLibrary INTEGER,
-    FOREIGN KEY (idPerson) REFERENCES Person(idPerson),
-    FOREIGN KEY (idLibrary) REFERENCES Library(idLibrary)
+    FOREIGN KEY (idPerson) REFERENCES Person(idPerson)
 );
 
 CREATE TABLE Author (
     idPerson INTEGER PRIMARY KEY,
-    biography TEXT,
+    biography TEXT NOT NULL,
     pseudonym VARCHAR(100),
     FOREIGN KEY (idPerson) REFERENCES Person(idPerson)
 );
@@ -126,17 +106,17 @@ CREATE TABLE Author (
 -- Relationships
 
 CREATE TABLE BookAuthor (
-    isbn VARCHAR(13),
+    idBook INTEGER,
     idPerson INTEGER,
-    PRIMARY KEY (isbn, idPerson),
-    FOREIGN KEY (isbn) REFERENCES Book(isbn),
+    PRIMARY KEY (idBook, idPerson),
+    FOREIGN KEY (idBook) REFERENCES Book(idBook),
     FOREIGN KEY (idPerson) REFERENCES Person(idPerson)
 );
 
 CREATE TABLE BookRequisition (
-    isbn VARCHAR(13),
+    idBook INTEGER,
     idRequisition INTEGER,
-    PRIMARY KEY (isbn, idRequisition),
-    FOREIGN KEY (isbn) REFERENCES Book(isbn),
+    PRIMARY KEY (idBook, idRequisition),
+    FOREIGN KEY (idBook) REFERENCES Book(idBook),
     FOREIGN KEY (idRequisition) REFERENCES Requisition(idRequisition)
 );
